@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+# the name of the metadata must be the same as the name that is used in the deployment source file
+# this is because the service will use the name to find the pods that it needs to expose
+# the service metadata name is like the domain name for the service, and it will be used to access the service from other pods in the cluster
+  name: redis
+  labels:
+    app: redis
+# specify the type of service and the port that it will be exposed on
+# the redis database is not meant to be exposed outside of the cluster, so we will use ClusterIP
+spec:
+  # specify the type of service and the port that it will be exposed on
+  # the redis database is not meant to be exposed outside of the cluster, so we will use ClusterIP
+  type: ClusterIP
+  ports:
+  - port: 6379
+    targetPort: 6379
+  # specify the selector to match the labels of the pods that we want to forward the traffic to
+  # if we get a request from the port 6379, we want to forward it to the pods that have the label app: redis
+  selector:
+    app: redis

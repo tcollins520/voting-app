@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: voting-app-pod
+  labels:
+    app: voting-app
+# give list of containers to run in the pod
+spec:
+  containers:
+  # specify the name of the container and the image to use
+  - name: voting-app
+    image: dockersamples/examplevotingapp_vote
+    # specify the port that the container will listen on
+    ports:
+    - containerPort: 80

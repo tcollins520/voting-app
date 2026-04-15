@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+# this is like the domain name for the service, it must be unique within the namespace
+  name: vote-service
+  labels:
+    app: voting-app
+# specify the type of service and the port that it will be exposed on
+# the target port is the port that the service will forward traffic to on the pods that match the selector
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 80
+    nodePort: 31001
+  # specify the selector to match the labels of the pods that we want to expose
+  selector:
+    app: voting-app 

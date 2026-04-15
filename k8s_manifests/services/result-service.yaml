@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+# the name of the service must be the same as the name that is used in the deployment source file
+  name: result
+  labels:
+    app: result
+# specify the type of service and the port that it will be exposed on
+# the target port is the port that the service will forward traffic to on the pods that match the selector
+spec:
+  type: NodePort
+  ports:
+  - port: 8081
+    targetPort: 80
+    nodePort: 31002
+  # specify the selector to match the labels of the pods that we want to expose
+  selector:
+    app: result
+  

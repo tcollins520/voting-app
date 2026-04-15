@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: worker-app-pod
+  labels:
+    app: worker-app
+# give list of containers to run in the pod
+spec:
+  containers:
+  - name: worker-app
+    image: dockersamples/examplevotingapp_worker

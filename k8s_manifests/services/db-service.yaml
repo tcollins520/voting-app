@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+# the name of the service must be the same as the name that is used in the deployment source file
+# the application has configured the database connection to use the name "db" as the hostname, so we will use that as the name of the service
+  name: db
+  labels:
+    app: db
+# specify the type of service and the port that it will be exposed on
+# the postgres database is not meant to be exposed outside of the cluster, so we will use ClusterIP
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    targetPort: 5432
+  # specify the selector to match the labels of the pods that we want to forward the traffic to
+  # if we get a request from the port 5432, we want to forward it to the pods that have the label app: db
+  selector:
+    app: db
