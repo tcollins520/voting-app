@@ -18,8 +18,12 @@ spec:
       - image: redis:alpine
         name: redis
         ports:
+        # the container port to be exposed, which allows the application to communicate with the Redis service running in the container
+        # traffic to this port will be forwarded to the Redis service, which allows the application to interact with the Redis database
         - containerPort: 6379
           name: redis
+        # the volume mount is used to mount a volume to the container, which allows the container to store data that can be accessed by other containers or pods in the cluster
+        # in this case, we are mounting an emptyDir volume to the /data directory in the container, which allows the Redis database to store its data in a persistent way, even if the container is restarted or recreated
         volumeMounts:
         - mountPath: /data
           name: redis-data

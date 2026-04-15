@@ -17,14 +17,20 @@ spec:
       containers:
       - image: postgres:15-alpine
         name: postgres
+        # the environment variables are used to set the username and password for the PostgreSQL database, which allows the application to authenticate with the database and perform operations such as creating tables, inserting data, and querying data
+        # give the name and value for each environment variable, which will be used by the PostgreSQL database to set up the initial user and password when the container is started
         env:
         - name: POSTGRES_USER
           value: postgres
         - name: POSTGRES_PASSWORD
           value: postgres
         ports:
+        # the container port to be exposed, which allows the application to communicate with the PostgreSQL service running in the container
+        # traffic to this port will be forwarded to the PostgreSQL service, which allows the application to interact with the PostgreSQL database
         - containerPort: 5432
           name: postgres
+        # the volume mount is used to mount a volume to the container, which allows the container to store data that can be accessed by other containers or pods in the cluster
+        # in this case, we are mounting an emptyDir volume to the /var/lib/postgresql/data directory in the container, which allows the PostgreSQL database to store its data in a persistent way, even if the container is restarted or recreated
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: db-data

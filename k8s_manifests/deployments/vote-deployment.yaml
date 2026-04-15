@@ -5,15 +5,21 @@ metadata:
     app: vote
   name: vote
 spec:
+# specs for the deployment such as the number of instances, the selector, and the template for the pods to be created
   replicas: 3
+  # the selector to identify the pods that belong to this deployment
+  # the selector is used to match the labels of the pods that are created by this deployment, which allows the deployment to manage and scale the pods effectively
   selector:
     matchLabels:
       app: vote
+  # the template for the pods to be created, which includes the metadata and the specification for the containers to be run in the pods
+  # metadata label and selector matchLabel must match for the deployment to manage the pods effectively
   template:
     metadata:
       labels:
         app: vote
     spec:
+    # the specification for the containers to be run in the pods, which includes the image to be used, the name of the container, and the ports to be exposed
       containers:
       - image: dockersamples/examplevotingapp_vote
         name: vote
